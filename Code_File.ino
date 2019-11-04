@@ -1,23 +1,19 @@
+int val = 0;    
+ 
 void setup() 
 {
-  Serial.begin(9600);
-  pinMode(13,OUTPUT); 
-
+  pinMode(13, OUTPUT);  
+  pinMode(7, INPUT);    
 }
-
-void loop() 
+ 
+void loop()
 {
-  if(Serial.available())
+  val = digitalRead(7);  
+  if (val == HIGH)
+  {        
+    digitalWrite(13, LOW); 
+  } else
   {
-      int data = Serial.read();
-      if(data=='1')
-      {
-          digitalWrite(13,HIGH);
-      }
-      if(data=='2')
-      {
-          digitalWrite(13,LOW);
-      }
-          
-      delay(50);  
+    digitalWrite(13, HIGH); 
   }
+}
