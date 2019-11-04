@@ -1,17 +1,29 @@
-#include<LiquidCrystal.h>
-const int rs=12,en=11,d4=,d5=4,d6=3,d7=2;
-LiquidCrystal led(rs,en,d4,d5,d6,d7);
 
+  
+long duration;
+int distance;
 void setup()
 {
-    led.begin(16,2);
+  Serial.begin(9600);
+  pinMode(10,OUTPUT);
+  pinMode(echoPin,INPUT);
 }
-
+ 
 void loop()
 {
-    led.setCursor(5,1);
-    led.print("Mohit");
-    
-    led.setCursor(5,0);
-    led.print("Satyam");
- }
+  digitalWrite(10,LOW);
+  delayMicroseconds(2);
+  
+  digitalWrite(10,HIGH);
+  delayMicroseconds(10);
+  
+  digitalWrite(10,LOW);
+  duration = pulseIn(9,HIGH);
+  
+  distance = duration/58.2;
+  
+  Serial.println(distance);
+  Serial.println("cm");
+  
+  delay(50);
+}
